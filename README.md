@@ -81,3 +81,22 @@ If you have PHP installed locally and you would like to use PHP's built-in devel
     $ php artisan serve
 
 Of course, more robust local development options are available via Homestead and Valet.
+
+
+      KILL PROCESS ARTISAN
+      
+
+5
+down vote
+Your previous deployment in your local is already running that's why you can't run php artisan serve. You can solve your issue by following this command in your terminal:
+
+    $ ps -ef | grep php you'll 
+    
+see this list:
+gujarat 6690 3500 0 05:55 pts/1 00:00:00 php artisan serve 
+gujarat 6694 6690 0 05:55 pts/1 00:00:00 sh -c '/usr/bin/php5' -S localhost:8000 '/home/gujarat/WebDevelopment/quickstart-basic'/server.php 
+gujarat 6695 6694 0 05:55 pts/1 00:00:00 /usr/bin/php5 -S localhost:8000 /home/gujarat/WebDevelopment/quickstart-basic/server.php 
+gujarat 7436 3500 0 06:26 pts/1 00:00:00 grep --color=auto php
+Now kill it using: sudo kill 6690 if still exist then use this sudo kill -9 6690 you'll see this result:
+[1]+ Killed php artisan serve
+Now you can serve your local using php artisan serve again
